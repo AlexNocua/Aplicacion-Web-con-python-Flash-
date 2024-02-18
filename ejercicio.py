@@ -94,11 +94,10 @@
 # salir = False
 
 
-
 # while salir==False:
 #     opcion = int(input(f"""
 #                 Bienvenido al banco BBVA
-#                 Su saldo es : { saldo} 
+#                 Su saldo es : { saldo}
 #                 ingrese por numero alguna de las siguientes opciones:
 #                 1.Ingresar dinero a la cuenta
 #                 2.Retirar deinero de la cuenta
@@ -128,39 +127,162 @@
 #         print('Su opcion no es valida, digite de nuevo')
 
 
-lista =["lunes","martes","miercoles","jueves","viernes"]
-print(lista[-1]) #manera inversa
-print(lista[1])
+# lista =["lunes","martes","miercoles","jueves","viernes"]
+# print(lista[-1]) #manera inversa
+# print(lista[1])
 
-##forma de crear subconjuntos
-print(lista[0:3])#menos un dato Sub lista
-print(lista[:4])#menos un dato Sub lista
-print(lista[:])#muestra todo
-print(lista[1:3])#
-print(lista[3:])#jueves y viernes
+# ##forma de crear subconjuntos
+# print(lista[0:3])#menos un dato Sub lista
+# print(lista[:4])#menos un dato Sub lista
+# print(lista[:])#muestra todo
+# print(lista[1:3])#
+# print(lista[3:])#jueves y viernes
 
-lista=["lunes",40,5.65,[1,2,3],True,5,5,5]
+# lista=["lunes",40,5.65,[1,2,3],True,5,5,5]
 
-lista.append(6)
-#lista.insert(2,2)
-lista.extend([6,7,8])
-print(len(lista))
+# lista.append(6)
+# #lista.insert(2,2)
+# lista.extend([6,7,8])
+# print(len(lista))
 
-nombres = 'alex','eduardo',3
-nombres2 = ['alex','eduardo',3]
-print(type(nombres))
-print(tuple(nombres))
-nombre3 = "a"
-print(ord(nombre3))
-print(chr(ord(nombre3)))
+# nombres = 'alex','eduardo',3
+# nombres2 = ['alex','eduardo',3]
+# print(type(nombres))
+# print(tuple(nombres))
+# nombre3 = "a"
+# print(ord(nombre3))
+# print(chr(ord(nombre3)))
 
-#print(4 in lista[4])
-print(lista.index(40)) #busca la posicion donde se encuetra este valor
-print(lista.count(40)) 
-print(lista.remove(5))#elimina el primer dato de la lista que sea 5
-#print(lista.clear())
-listanum = [1,2,4,5,3]
-print(listanum.sort()) 
-print(listanum)##solo numeros
-print(listanum.sort(reverse=True)) ##solo numeros
-print(listanum)
+# #print(4 in lista[4])
+# print(lista.index(40)) #busca la posicion donde se encuetra este valor
+# print(lista.count(40))
+# print(lista.remove(5))#elimina el primer dato de la lista que sea 5
+# #print(lista.clear())
+# listanum = [1,2,4,5,3]
+# print(listanum.sort())
+# print(listanum)##solo numeros
+# print(listanum.sort(reverse=True)) ##solo numeros
+# print(listanum)
+
+list_ProductAliments = []
+list_ProductsAseo = []
+list_Productlicores = []
+
+while True:
+    opcion = (input(f"""    
+        --Buen dia--
+        
+        Informacion de las listas:                                
+        Lista de productos de alimentos
+        {list_ProductAliments}                      
+        Lista de porductos de aseo:    
+        {list_ProductsAseo}                      
+        Lista de productos de licores: 
+        {list_Productlicores}                      
+                                        
+        Digita la opcion que desees
+        1. Adicionar un producto   
+        2. Buscar algun producto   
+        3. Eliminar un producto     
+        4. Mostrar productos ingresados
+        5. Salir   
+    """))
+    if opcion == '1':
+        while True:
+            categoria_Producto = (input("""
+        Seleccione la categora de producto a ingresar:
+        1.Alimentos
+        2.Aseo
+        3.Licores
+        4.No adicionar producto
+        """))
+
+            if categoria_Producto == '1':
+                # ingresar producto  de alimento
+                producto = input("Digite su producto de alimento: ")
+                list_ProductAliments.append(producto)
+                # Eliminar producto ingresado
+                producto = ''
+            elif categoria_Producto == '2':
+                # ingresar producto  de aseo
+                producto = input("Digite su producto de aseo: ")
+                list_ProductsAseo.append(producto)
+                # Eliminar producto ingresado
+                producto = ''
+            elif categoria_Producto == '3':
+                # ingresar producto  de licor
+                producto = input("Digite su producto de licor: ")
+                list_Productlicores.append(producto)
+                # Eliminar producto ingresado
+                producto = ''
+            elif categoria_Producto =='4':
+                print("No adiciono ningun producto")
+                break
+            else:
+                print('Opcion no valida, por favor digite una opcion valida.')
+                
+    elif opcion == '2':
+        while True:
+            producto_Buscado = input("Digita el producto a buscar: ")
+            if producto_Buscado in list_ProductAliments:
+                print(
+                    f'Su producto esta en su lista de alimentos en la posicion numero {(list_ProductAliments.index(producto_Buscado)+1)}.')
+            elif producto_Buscado in list_ProductsAseo:
+                print(
+                    f'Su producto esta en su lista de productos de aseo en la posicion numero {(list_ProductsAseo.index(producto_Buscado)+1)}.')
+
+            elif producto_Buscado in list_Productlicores:
+                print(
+                    f'Su producto esta en su lista de licores en la posicion numero {(list_Productlicores.index(producto_Buscado)+1)}.')
+            else:
+                print(
+                    f"El producto buscado '{producto_Buscado}' no se encuentra en ninguna de las listas.")
+
+            op_Busq_Producto = input(
+                "¿Desea buscar otro producto? Digite 's' o 'n'").lower()
+            if op_Busq_Producto == 'n':
+                break
+            else:
+                if op_Busq_Producto!= 's':
+                    print('Opcion no valida, redireccion al menu...')
+                    break
+    elif opcion == '3':
+        while True:
+            producto_aEliminar = input(
+                "Digite el nombre del producto que desea eliminar: ")
+            if producto_aEliminar in list_ProductAliments:
+                list_ProductAliments.remove(producto_aEliminar)
+                print(
+                    f'Se elimino el producto "{producto_aEliminar}" de su lista de alimentos')
+            elif producto_aEliminar in list_ProductsAseo:
+                list_ProductsAseo.remove(producto_aEliminar)
+                print(
+                    f'Se elimino el producto "{producto_aEliminar}" de su lista de productos de aseo')
+
+            elif producto_aEliminar in list_Productlicores:
+                list_Productlicores.remove(producto_aEliminar)
+                print(
+                    f'Se elimino el producto "{producto_aEliminar}" de su lista de licores')
+            else:
+                print(
+                    f"No se encontro el producto que deseas eliminar")
+                
+            op_delete_Product = input(
+                "¿Desea eliminar otro producto? Digite 's' o 'n'").lower()
+            if op_delete_Product == 'n':
+                break
+            else:
+                if op_delete_Product != 's':
+                    print('Opcion no valida, redireccion al menu...')
+                    break
+    elif opcion == '4':
+        print(f"""Estos son los productos que usted ha ingresado:
+            Alimentos: {list_ProductAliments}
+            Productos de aseo: {list_ProductsAseo}
+            Licores: {list_Productlicores}
+              """)
+    elif opcion == '5':
+        print('Gracias por utilizar nuestro servicio.\nHasta luego.')
+        break
+    else:
+        print("Por favor, rectifique su opcion ingresada")
