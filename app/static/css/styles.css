@@ -7,33 +7,121 @@
     --components-bg-color: rgba(255, 87, 51, 0.5);;
    --tittles-color:#EEEEEE;
     --tittles--size: 24px;
---background:linear-gradient(20deg, #005fff, 20%, #000000);;
+--background:linear-gradient(20deg, #005fff, 20%, #000000);
+--color-text-p : #B4B4B4;
+--color-text-h4:#EEEEEE;
+
+  }
+
+  html{
+    background: var(--background);
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
 
 body{
-    background: var(--background);
+   
+    display: flex;
+    justify-content: center;
+    background:transparent;
     font-family: "Roboto", sans-serif;
     
-    
+   
 }
+
+h4{
+    color: var(--color-text-h4);
+    padding: 12px 0px 0px 0px;
+}
+p{
+    color : var(--color-text-p)
+}
+
+
 .login {
+
+    border-radius:16px;
     background:rgb(32 32 32 / 50%);
+    padding:20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    max-height:70%;
+    max-width:80%;
+    min-height:400px;
+    min-width:500px;
+
 }
-.login .content{
-    display:flex;
+
+.app_description {
+    display: flex;
+    color:#fff;
+    
+    margin: 12px;
+    flex-direction: column;
+}
+.app_description img{
+    width:100px;
+    height:100px;
+}
+.app_description h4{
+    color:#fff;
+    font-size:20px;
+}
+
+.login .contenido_login{
+    box-shadow: -10px 0 10px -5px rgb(9 14 38 / 80%);
+    padding:12px;
+}
+input{
+    padding:8px 12px;
+    background-color:#fff;
+    border-radius:12px;
+    border:none;
+}
+
+.btn-Ingresar{
+    padding:12px;
+    
+    background: linear-gradient(49deg, #0d0d62,70%, #0a0a0a);
+    color:#fff;
+    border:none;
+    border-radius:8px;
+}
+
+
+
+.btn-Register{
+    margin:0 12px;
+    border: none;
+    background: #6a9be3;
     color: var(--tittles-color);
-    flex-direction:column;
-    align-items:center;
+    border-radius: 12px;
+    padding: 12px;
+    width:100%;
+}
+
+.btn-mostrar_Form{
+background-color: transparent;
+    color: #fff;
+    border: none;
+    text-decoration: underline;
 }
 
 .input_password, .input_email{
     width: 80%;
     /* margin: 8px; */
 }
+//form
+.terminos{
+    flex-direction: column;
+}
 
+label{
+    color:#fff;
+}
 //Mostar form en el login 
 .mostrar_Form{
 
