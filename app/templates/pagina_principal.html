@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block pagina_principal %}
+  <body>
+    <nav>
+      <div>
+        <span><img src="" alt="" /></span>
+        <div>
+          <!-- Icono de barra de busquda -->
+          <span><img src="" alt="" /></span>
+          <input type="text" name="" id="" />
+        </div>
+        <div>solicitudes de mensaje confoguraciones</div>
+      </div>
+    </nav>
+    <div>
+      Informacion nuevas publicaciones<div>
+        <span><img src="{{ url_for('static', filename = 'css/icons/') }}" alt="" /></span>
+        <h1>Nombre</h1>
+      </div>
+      <div>
+        <span>
+          <img src="{{ url_for('static', filename = 'img/icons/Icon_friend.png') }}" alt="" />
+          <p>Amigos</p>
+        </span>
+        <span>
+          <img src="{{ url_for('static', filename = 'img/icons/imagen-icon.png') }}" alt="" />
+          <p>Fotos</p>
+        </span>
+        <span>
+          <img src="{{ url_for('static', filename = 'img/icons/publication-icon.png') }}" alt="" />
+          <p>Publicaciones</p>
+        </span>
+        <span>
+          <img src="{{ url_for('static', filename = 'img/icons/guardado-icon.png') }}" alt="" />
+          <p>Guardados</p>
+        </span>
+        <span>
+          <img src="{{ url_for('static', filename = 'img/icons/solicitud-icon.png') }}" alt="" />
+          <p>Solicitudes</p>
+        </span>
+      </div>
+    </div>
+
+    <div class="seccion">publicaciones</div>
+
+    <!-- Esto va a ser manejado como scroll -->
+    <div>
+      <div>Publicidad</div>
+      <div>Paginas</div>
+      <div>Activos</div>
+    </div>
+  </body>
+{% endblock %}

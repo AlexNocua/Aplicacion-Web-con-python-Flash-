@@ -21,6 +21,13 @@ def login():
     # rednerizado con jinja2
     return render_template('login.html')
 
+# prueba de funcionamiento y rendereizado de la pagina principal
+
+
+@app.route('/pagina_principal')
+def pagina_principla():
+    return render_template('pagina_principal.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
