@@ -1,24 +1,30 @@
 {% extends 'base.html' %}
 
 {% block pagina_principal %}
-  <body>
-    <nav>
+  <nav class="nav_fixed d-flex fixed-top justify-content-center">
+    <div>
+      <span><img src="" alt="" /></span>
       <div>
-        <span><img src="" alt="" /></span>
-        <div>
-          <!-- Icono de barra de busquda -->
-          <span><img src="" alt="" /></span>
+        <!-- Icono de barra de busquda -->
+        <div style="background-color: aliceblue;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+          </svg>
           <input type="text" name="" id="" />
         </div>
-        <div>solicitudes de mensaje confoguraciones</div>
       </div>
-    </nav>
-    <div>
-      Informacion nuevas publicaciones<div>
+      <div>solicitudes de mensaje confoguraciones</div>
+    </div>
+  </nav>
+
+  <div class="d-flex">
+    <div class="section_information_user d-flex col-3 flex-column">
+      <div class="justify-content-center">
+        <!-- imagen recibida del ususario -->
         <span><img src="{{ url_for('static', filename = 'css/icons/') }}" alt="" /></span>
-        <h1>Nombre</h1>
+        <p>Nombre</p>
       </div>
-      <div>
+      <div class="row">
         <span>
           <img src="{{ url_for('static', filename = 'img/icons/Icon_friend.png') }}" alt="" />
           <p>Amigos</p>
@@ -42,13 +48,55 @@
       </div>
     </div>
 
-    <div class="seccion">publicaciones</div>
+    <div class="section_publications d-flex col flex-column">
+      <div class="d-flex flex-column">
+        <div class="row">
+          <!-- imagen recuperadad del usuario -->
+          <img src="" alt="" />
+          <input type="text" />
+        </div>
+        <div class="row">
+          <span class="d-flex">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+              <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+              <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
+            </svg>
+            <p>imagen</p>
+          </span>
+          <span class="d-flex">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fast-forward-btn" viewBox="0 0 16 16">
+              <path d="M8.79 5.093A.5.5 0 0 0 8 5.5v1.886L4.79 5.093A.5.5 0 0 0 4 5.5v5a.5.5 0 0 0 .79.407L8 8.614V10.5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z" />
+              <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 0a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1z" />
+            </svg>
+            <p>video</p>
+          </span>
+        </div>
+      </div>
+      <div class="d-flex row">
+        <div class="col flex-column">
+          <h5>nombreUsuario</h5>
+          <img src="" alt="imagen" />
+        </div>
+        <div class="col">
+          <span class="flex-column">
+            <img src="" alt="imagen" />
+            <p>fecha</p>
+          </span>
+        </div>
+      </div>
+    </div>
 
     <!-- Esto va a ser manejado como scroll -->
-    <div>
-      <div>Publicidad</div>
-      <div>Paginas</div>
-      <div>Activos</div>
+    <div class="section_others d-flex col-3 flex-column">
+      <div class="d-flex">
+        <h4>Publicidad</h4>
+      </div>
+      <div class="d-flex">
+        <h4>Paginas</h4>
+      </div>
+      <div class="d-flex">
+        <h4>Activos</h4>
+      </div>
     </div>
-  </body>
+  </div>
 {% endblock %}

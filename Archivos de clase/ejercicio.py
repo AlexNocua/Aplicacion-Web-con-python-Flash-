@@ -316,50 +316,120 @@
 
 # print(curso['estudiante']['id']['par'])
 
-# agendaTelefonica = {
+# agendaTelefonicaubate = {
 #     'Alex': '1234',
 #     'Eduardo': '4567',
 #     'Nocua': '8901',
 #     'Sema': '2345',
 #     'Baquero': '6789'
 # }
-agendaTelefonica={}
+# agendaTelefonica={}
 
 
+# while True:
+#     opcion=int(input('''Seleccione alguna de las opciones
+#           1. Mostrar datos
+#           2. Mostrar telefono
+#           3. Consulta de numeros
+#           4. Obtener el total de personas
+#           5. Agregar personas
+#           6. Salir
+#           '''))
+#     if opcion == 1:
+#         print(agendaTelefonica)
+#     elif opcion ==2:
+#         print(agendaTelefonica.values())
+#     elif opcion ==3:
+#         nombrePersona = input('Digite el nombred e la persona: ')
+#         print(agendaTelefonica.get(nombrePersona,f'No se encontro ningun numero para la persona {nombrePersona}'))
+#     elif opcion ==4:
+#         print('Cantidad de Personas: ')
+#         print(len(agendaTelefonica))
+#     elif opcion ==5:
+#         cantidad = int(input('Digite la cantidad de perosnas que quiere ingresar'))
+#         for i in range(cantidad):
+#             nombre =input(f'Digite el Nombre de la persona {i+1}: ')
+#             tel = (input(f'Digite el numero de la persona {nombre} :'))
+#             agendaTelefonica[nombre]=tel
 
+
+#             print(agendaTelefonica)
+#     elif opcion ==6:
+#         print('Gracias')
+#         break
+#     else:
+#         print('Seleccione alna de las opciones')
+
+
+# Sistema de contlo y gestion de inventario
+
+almacen={
+
+}
+print('Sistema de gestion y contro de inventario')
+
+list_productos = []
+list_Infproductos = []
+i = 0
+codigo_encriptado=0
 while True:
-    opcion=int(input('''Seleccione alguna de las opciones
-          1. Mostrar datos
-          2. Mostrar telefono
-          3. Consulta de numeros
-          4. Obtener el total de personas
-          5. Agregar personas
-          6. Salir
-          '''))
-    if opcion == 1:
-        print(agendaTelefonica)
-    elif opcion ==2:
-        print(agendaTelefonica.values())
-    elif opcion ==3:
-        nombrePersona = input('Digite el nombred e la persona: ')
-        print(agendaTelefonica.get(nombrePersona,f'No se encontro ningun numero para la persona {nombrePersona}'))
-    elif opcion ==4:
-        print('Cantidad de Personas: ')
-        print(len(agendaTelefonica))
-    elif opcion ==5:
-        cantidad = int(input('Digite la cantidad de perosnas que quiere ingresar'))
-        for i in range(cantidad):
-            nombre =input(f'Digite el Nombre de la persona {i+1}: ')
-            tel = (input(f'Digite el numero de la persona {nombre} :'))
-            agendaTelefonica[nombre]=tel
+    nombre_Operario = input(
+            'Por favor Digite el nombre de quiena va a realizar el informe: ')
+    num_envio = int(input(
+            'Por favor Digite el codigo numero de envio que recibio: '))
     
     
-            print(agendaTelefonica)
-    elif opcion ==6:
-        print('Gracias')
-        break
-    else:
-        print('Seleccione alna de las opciones')
-    
+    while True:
         
+        opcion = int(input("""
+        1.Ingresar producto recibido
+        2.Generar codigo encriptado del los productos
+        3.Muestra productos ingresados
+        4.Limpiar ingreso de productos
+        5.Generar informe.
+        6.Mostrar operarios.
+        7.Cambiar de Operario  
+            
+                    """))
+
+        if opcion == 1:
+
+            while True:
+
+                nombre_product = input('Digite el nombre del producto: ')
+                id = int(input('Digite el id del producto: '))
+                h_ingreso = input(
+                    'Digite el hora de ingreso en formato 24  horas del producto: ')
+                list_Infproductos.extend(([nombre_product, id, h_ingreso]))
+                list_productos.append((list_Infproductos))
+                break
+        elif opcion == 2:
+            codigo_encriptado = hex(num_envio)
+            print(codigo_encriptado)
+        elif opcion == 3:
+            print('Sus productos ingresados son:', list_Infproductos)
+        elif opcion == 4:
+            list_Infproductos.clear()
+            list_productos.clear()
+
+        elif opcion == 5:
+            print(f'''Informe de productos Ingresados
+                
+                Esta es la lista de todos los productos que ingreso: {tuple(list_productos)}
+                
+                Informe presentado por: {nombre_Operario}
+                Codigo de envio: {codigo_encriptado}
+                ''')
+        elif opcion == 6:
+            
+            while True:
+                almacen[f'Operario {nombre_Operario}'] = f'Codigo encriptado de recibida de envio: {codigo_encriptado}'
+                print(almacen)
+                break
+        elif opcion == 7:
+            break
+        else:
+            print('por favor digite una de las opciones estableidas')
+        
+
     
