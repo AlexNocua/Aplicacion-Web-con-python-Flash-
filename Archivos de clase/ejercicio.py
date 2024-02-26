@@ -363,7 +363,7 @@
 
 # Sistema de contlo y gestion de inventario
 
-almacen={
+almacen = {
 
 }
 print('Sistema de gestion y contro de inventario')
@@ -371,48 +371,95 @@ print('Sistema de gestion y contro de inventario')
 list_productos = []
 list_Infproductos = []
 i = 0
-codigo_encriptado=0
+codigo_encriptado = 0
 while True:
+    opcion = (input(
+        'Digite la letra "S" si desea continuar, le do contario pulce cualquier letra'))
+    if opcion != 's':
+        print('Gracias por utilizar el programa.').lowe()
+        break
+
     nombre_Operario = input(
-            'Por favor Digite el nombre de quiena va a realizar el informe: ')
+        'Por favor Digite el nombre de quiena va a realizar el informe: ')
     num_envio = int(input(
-            'Por favor Digite el codigo numero de envio que recibio: '))
-    
-    
+        'Por favor Digite el codigo numero de envio que recibio: '))
+
     while True:
-        
+
         opcion = int(input("""
-        1.Ingresar producto recibido
-        2.Generar codigo encriptado del los productos
-        3.Muestra productos ingresados
-        4.Limpiar ingreso de productos
-        5.Generar informe.
-        6.Mostrar operarios.
-        7.Cambiar de Operario  
+        1.Ingresar producto recibido.
+        2.Modificar datos de productos.
+        3.Eliminar registro de productos recibidos.
+        4.Muestra productos ingresados.
+        5.Limpiar ingreso de productos.
+        6.Generar informe.
+        7.Mostrar operarios.
+        8.Cambiar de Operario o salir. 
             
                     """))
 
         if opcion == 1:
 
             while True:
-
-                nombre_product = input('Digite el nombre del producto: ')
+                i += 1
+                nombre = input('Digite el nombre del producto: ')
                 id = int(input('Digite el id del producto: '))
                 h_ingreso = input(
                     'Digite el hora de ingreso en formato 24  horas del producto: ')
-                list_Infproductos.extend(([nombre_product, id, h_ingreso]))
-                list_productos.append((list_Infproductos))
+
+                almacen[f'Producto {i}'] = {
+                    'nombre_product': nombre,
+                    'id': id,
+                    'horaIngreso': h_ingreso
+                }
+
                 break
         elif opcion == 2:
-            codigo_encriptado = hex(num_envio)
-            print(codigo_encriptado)
+            print('Los producto ingresados son: ', almacen.keys(),
+                  '\n Recuerde digitar el nombre exactamente como esta')
+            nombre_product = input(
+                'Digite el nombre del producto que desea modificar: ')
+            while True:
+
+                opcion = int(input('''Digita al informacion que deseas modificar: 
+                      
+                        1. Nombre del producto.
+                        2. Id del producto:
+                        3. Hora de ingreso del producto.
+                        4. No modificar el producto.'''))
+                if opcion == 1:
+                    nombre = input('Digite el nombre del producto: ')
+
+                elif opcion == 2:
+                    id = int(input('Digite el id del producto: '))
+                elif opcion == 3:
+                    h_ingreso = input(
+                        'Digite el hora de ingreso en formato 24  horas del producto: ')
+                elif opcion == 4:
+                    break
+                else:
+                    print('Por favor digite una opcion correcta. \n')
+
+                almacen[nombre_product] = {
+                    'nombre_product': nombre,
+                    'id': id,
+                    'horaIngreso': h_ingreso
+                }
         elif opcion == 3:
-            print('Sus productos ingresados son:', list_Infproductos)
+            print('Los producto ingresados son: ', almacen.keys(),
+                  '\n Recuerde digitar el nombre exactamente como esta.')
+            nombre_product = input(
+                'Digite el nombre del producto que desea eliminar: ')
         elif opcion == 4:
+            print('Sus productos ingresados son:')
+            for items in almacen.items():
+                print(items)
+
+        elif opcion == 5:
             list_Infproductos.clear()
             list_productos.clear()
 
-        elif opcion == 5:
+        elif opcion == 6:
             print(f'''Informe de productos Ingresados
                 
                 Esta es la lista de todos los productos que ingreso: {tuple(list_productos)}
@@ -420,16 +467,13 @@ while True:
                 Informe presentado por: {nombre_Operario}
                 Codigo de envio: {codigo_encriptado}
                 ''')
-        elif opcion == 6:
-            
+        elif opcion == 7:
+
             while True:
                 almacen[f'Operario {nombre_Operario}'] = f'Codigo encriptado de recibida de envio: {codigo_encriptado}'
                 print(almacen)
                 break
-        elif opcion == 7:
+        elif opcion == 8:
             break
         else:
             print('por favor digite una de las opciones estableidas')
-        
-
-    
