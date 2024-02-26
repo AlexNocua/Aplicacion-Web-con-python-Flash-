@@ -29,5 +29,10 @@ def pagina_principla():
     return render_template('pagina_principal.html')
 
 
+@app.route('/publicacion')
+def agregarUser():
+    return render_template('publicacion.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
