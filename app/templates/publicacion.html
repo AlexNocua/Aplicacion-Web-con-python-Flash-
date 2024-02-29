@@ -1,18 +1,23 @@
 {% extends 'base.html' %}
 
 {% block contenedor %}
-  <div class="cointainer d-flex row justify-content-center align-content-center" style="background-color: rgba(255,255,255,0.2); border-radius: 12px; filter: opacity(1);">
-    <h4 class="text-center">Informacion de usuario</h4>
-    <div class="d-flex justify-content-center flex-column">
-      <h6 class="" style="color: #fff;">Digiftela informacion que desea ingresar</h6>
-      <textarea name="" id="" cols="30" rows="10" style="border-radius: 12px;"></textarea>
+  <div class="cointainer d-flex  justify-content-center align-content-center" style="background-color: rgba(255,255,255,0.2); border-radius: 12px; filter: opacity(1);">
+    <div class="content_publication m-4">
+<button class="button-cerrar">      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+</svg></button>
+      <h4 class="text-center mt-2 mb-2" >Informacion de usuario</h4>
+    <div class="d-flex justify-content-center flex-column m-2">
+      <h6 class="text-center" style="color: #fff; " >Digitela informacion que desea ingresar</h6>
+      <textarea class="textarea p-3" name="" id="" cols="30" rows="10" style="border-radius: 12px;" class="m-2" placeholder='¿Que estas pensando?'></textarea>
       <div class="m-0">
-        <ul class="d-flex p-3 m-3 justify-content-around" style="color: #fff; list-style: none;  ">
-          <li class='m-2'><a href="" class="" style="color: #fff;text-decoration:none;">Ingresar texto</a></li>
-          <li class='m-2'><a href="" class="" style="color: #fff;text-decoration:none;">Ingresar Imagen</a></li>
-          <li class='m-2'><a href="" class="" style="color: #fff;text-decoration:none;">Ingresar Audio</a></li>
+        <ul class="d-flex justify-content-around m-0 p-0" style="color: #fff; list-style: none;  ">
+          <li class='m-2'><img src="{{url_for('static', filename ="img/icons/text-icon.png")}}" alt="" class= 'm-1'><a href="" class="" style="color: #fff;text-decoration:none;">Ingresar texto</a></li>
+          <li class='m-2'><img src="{{url_for('static', filename ="img/icons/imagen-icon.png")}}" alt="" class= 'm-1'><a href="" class="" style="color: #fff;text-decoration:none;">Ingresar Imagen</a></li>
+          <li class='m-2'><img src="{{url_for('static', filename ="img/icons/Audio-icon.png")}}" alt="" class= 'm-1'><a href="" class="" style="color: #fff;text-decoration:none;">Ingresar Audio</a></li>
         </ul>
       </div>
+    </div>
     </div>
   </div>
 {% endblock %}

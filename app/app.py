@@ -34,5 +34,9 @@ def agregarUser():
     return render_template('publicacion.html')
 
 
+@app.route('/personInformation')
+def inforPerson():
+    return render_template('informacionPersona.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
