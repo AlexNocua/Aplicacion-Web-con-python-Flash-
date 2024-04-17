@@ -10,7 +10,12 @@
 # inicializacion base
 #####################################
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request , redirect,url_for
+from config import *
+from ClaseFormulario import formulario
+
+
+con_bd =conexion()
 
 # definicion de archivo principal
 app = Flask(__name__)
@@ -37,6 +42,33 @@ def agregarUser():
 @app.route('/personInformation')
 def inforPerson():
     return render_template('informacionPersona.html')
+
+
+@app.route('/registro') 
+def index():  
+    coleccionPersonas =con_bd['Registro']
+    PersonasRegistradas = coleccionPersonas.find()
+    return render_template('login.html', datos = PersonasRegistradas)
+
+
+@app.route('/guardar_personas',methods=['POST']) 
+def agregarPersona():
+    personas =con_bd['personas']
+    
+    nombre = request.form['nombre']
+    usuario = request.form['usuario']
+    residencia = request.form['residencia']
+    contraseña = request.form['contraseña']
+    configContraseña= request.form['configContraseña']
+
+
+    if nombre and usuario and residencia and contraseña and configContraseña: 
+        persona1 = formulario(nombre,residencia,contraseña,configContraseña)
+        personas.insert_one(persona1.formato_doc())
+        return redirect(url_for('index'))
+    
+    else:
+        return "Error "
 
 if __name__ == '__main__':
     app.run(debug=True)
