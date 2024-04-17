@@ -54,7 +54,6 @@ def index():
 @app.route('/guardar_personas',methods=['POST']) 
 def agregarPersona():
     personas =con_bd['personas']
-    
     nombre = request.form['nombre']
     usuario = request.form['usuario']
     residencia = request.form['residencia']
