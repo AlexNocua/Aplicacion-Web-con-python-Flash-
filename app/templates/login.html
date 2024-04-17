@@ -27,50 +27,44 @@
       <button id="mostrar_Form" class="btn-Register">Registrate</button>
     </div>
   </div>
-  <div class="register" id="register" style="display: none;">
-    <form class="row g-3 flex">
-      <div class="col-md-4">
-        <h4>Digita tu nombre y apellido</h4>
-        <label for="validationServer01" class="form-label">First name</label>
-        <input type="text" class="form-control is-valid" id="validationServer01" value="Mark" required />
+  <div class="register w-100" id="register" style="display: none;">
+    <form class="formulario d-flex flex-column align-items-center justify-content-center w-100">
+      <div class="entrada d-flex flex-column justify-content-center align-items-center w-100">
+        <h4>Digite su nombre</h4>
+        <input class="w-50" type="text">
       </div>
-      <div class="col-md-4">
-        <h4>¿Cual es tu ciudad de recidencia?</h4>
-        <label for="validationServerUsername" class="form-label">Username</label>
-        <div class="input-group">
-          <span class="input-group-text" id="inputGroupPrepend3">@</span>
-          <input type="text" class="form-control "   />
-        </div>
+      <div class="entrada d-flex flex-column justify-content-center align-items-center w-100">
+        <h4>Digite su apellido</h4>
+        <input class="w-50" type="text">
       </div>
-      <div class="col">
-        <h4>Digita tu nombre y apellido</h4>
-        <label for="validationServer03" class="form-label">Ciudad de residencia</label>
-        <input type="text" class="form-control " />
+      <div class="entrada d-flex flex-column justify-content-center align-items-center w-100">
+        <h4>Digite su correo</h4>
+        <input class="w-50" type="email">
       </div>
-      <div class="row">
-        <div class="col-md-3">
-          <h4>Contraseña</h4>
-          <label for="validationServer04" class="form-label">State</label>
-          <select class="form-select " >
-          </select>
-          
-        </div>
-        <div class="col-md-3">
-          <h4>Verifica tu contraseña</h4>F
-          <label for="validationServer05" class="form-label">Zip</label>
-          <input type="text" class="form-control "/>
-         
-        </div>
+      <div class="entrada d-flex flex-column justify-content-center align-items-center w-100">
+        <h4>Digite su contraseña</h4>
+        <input class="w-50" type="email">
       </div>
-      <div class="flex-column col-12 d-flex  justify-content-center ">
-       <p>Conoce nuestro terminos y condiciones.</p>
-       <span><p>¿Aceptas nuestros terminos y condiciones?</p> <input type="checkbox"></span>
+      <div class="entrada d-flex flex-column justify-content-center align-items-center w-100">
+        <h4>Verifique su contraseña</h4>
+        <input class="w-50" type="email">
       </div>
-      <div class="col-12">
-        <button class="btn btn-primary" type="submit">Submit form</button>
-        <button id='btn_volverLogin' class="btn btn-danger" type="submit">Volver</button>
+      <div class="entrada d-flex flex-column justify-content-center align-items-center w-100 d-flex row p-2">
+        <div class="d-flex m-2"><h4>Acuerdo de tratamiento de datos</h4>
+          <label class="m-2" for="">Esta de acuerdo con nuestros términos y condiciones</label></div>
+        <p class="text-center">Estoy de acuerdo. <input type="checkbox"></p>
+      </div>
+      <div>
+        <button class="btn-Register">Registrar Informacion</button>
       </div>
     </form>
+    <div class="informacionForm col-5 d-flex flex-column justify-content-center w-50">
+  
+        <h1>Crea tu cuenta</h1>
+        <p>Participa en nuestra app web y creando tu usuario e interactuando con otros.</p>
+      
+    
+    </div>
   </div>
 {% endblock %}
 
