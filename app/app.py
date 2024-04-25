@@ -6,7 +6,6 @@ from ClaseFormulario import formulario
 
 con_bd =conexion()
 
-# definicion de archivo principal
 app = Flask(__name__)
 
 
@@ -38,8 +37,8 @@ def agregarPersona():
 # prueba de funcionamiento y rendereizado de la pagina principal
 @app.route('/pagina_principal')
 def pagina_principla():
-    return render_template('pagina_principal.html')
 
+    return render_template('pagina_principal.html')
 
 @app.route('/publicacion')
 def agregarUser():
