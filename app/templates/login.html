@@ -8,19 +8,19 @@
 
        -->
 {% block contenedor %}
-  <div class="login ">
-    <div id="app_description" class="app_description col-7">
-      <h1>LinealChat</h1>
-      <p>Ingresa a nuestra app o crea una cuenta y comparte con los demás usuarios.</p>
-      <!--<span><img src="{{url_for( 'static', filename = 'img/app_initial.png')}}" alt=""></span>-->
-    </div>
-    <div class="contenido_login col justify-content-center text-center" id="contenido_login">
-      <h4>Correo o usuario</h4>
-      <input class="input_email" type="email" name="" id="" placeholder="email ou username" />
-      <h4>Password</h4>
-      <input class="input_password" type="password" name="" id="" placeholder="password" />
-      <button class="btn-Ingresar mt-2">Ingresar</button>
-    <div class="row"> 
+<div class="login ">
+  <div id="app_description" class="app_description col-7">
+    <h1>LinealChat</h1>
+    <p>Ingresa a nuestra app o crea una cuenta y comparte con los demás usuarios.</p>
+    <!--<span><img src="{{url_for( 'static', filename = 'img/app_initial.png')}}" alt=""></span>-->
+  </div>
+  <div class="contenido_login col justify-content-center text-center" id="contenido_login">
+    <h4>Correo o usuario</h4>
+    <input class="input_email" type="email" name="" id="" placeholder="email ou username" />
+    <h4>Password</h4>
+    <input class="input_password" type="password" name="" id="" placeholder="password" />
+    <button class="btn-Ingresar mt-2">Ingresar</button>
+    <div class="row">
       <button class="btn-mostrar_Form">¿Olvidaste tu contraseña?</button>
 
       <p>No tienes cuenta</p>
@@ -28,7 +28,8 @@
     </div>
   </div>
   <div class="register w-100" id="register" style="display: none;">
-    <form class="formulario d-flex flex-column align-items-center justify-content-center w-100" action="guardar_personas" method="post">
+    <form class="formulario d-flex flex-column align-items-center justify-content-center w-100"
+      action="guardar_personas" method="post">
       <div class="entrada d-flex flex-column justify-content-center align-items-center w-100">
         <h4>Digite su nombre</h4>
         <input class="w-50" type="text" name="nombre">
@@ -43,29 +44,32 @@
       </div>
       <div class="entrada d-flex flex-column justify-content-center align-items-center w-100">
         <h4>Digite su contraseña</h4>
-        <input class="w-50" type="email" name="contaseña">
+        <input class="w-50" type="email" name="contraseña">
       </div>
       <div class="entrada d-flex flex-column justify-content-center align-items-center w-100">
         <h4>Verifique su contraseña</h4>
         <input class="w-50" type="email" name="configContraseña">
       </div>
       <div class="entrada d-flex flex-column justify-content-center align-items-center w-100 d-flex row p-2">
-        <div class="d-flex m-2"><h4>Acuerdo de tratamiento de datos</h4>
-          <label class="m-2" for="">Esta de acuerdo con nuestros términos y condiciones</label></div>
+        <div class="d-flex m-2">
+          <h4>Acuerdo de tratamiento de datos</h4>
+          <label class="m-2" for="">Esta de acuerdo con nuestros términos y condiciones</label>
+        </div>
         <p class="text-center">Estoy de acuerdo. <input type="checkbox"></p>
       </div>
       <div>
-        <button class="btn-Register">Registrar Informacion</button>
+        <a href=""> <button class="btn-Register" type="submit">Registrar Informacion</button></a>
+
       </div>
     </form>
     <div class="informacionForm col-5 d-flex flex-column justify-content-center w-50">
-  
-        <h1>Crea tu cuenta</h1>
-        <p>Participa en nuestra app web y creando tu usuario e interactuando con otros.</p>
-      
-    
+
+      <h1>Crea tu cuenta</h1>
+      <p>Participa en nuestra app web y creando tu usuario e interactuando con otros.</p>
+
+
     </div>
   </div>
-{% endblock %}
+  {% endblock %}
 
-<!-- mesaje de prueba  -->
+  <!-- mesaje de prueba  -->
