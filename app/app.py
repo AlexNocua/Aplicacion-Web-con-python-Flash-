@@ -5,7 +5,7 @@ from ClaseFormulario import formulario
 import base64
 
 
-con_bd = Conexion()
+con_bd = conexion()
 # con_bd = conexion() #Baquero
 
 app = Flask(__name__)
@@ -125,7 +125,7 @@ def inforPerson():
 
 @ app.route('/configuracion')
 def configuracion():
-    return render_template('configuraciones.html')
+    return render_template('configuracionCuenta.html')
 
 
 if __name__ == '__main__':
