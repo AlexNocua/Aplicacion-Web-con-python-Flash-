@@ -1,44 +1,41 @@
-.button-cerrar{
+.button-cerrar {
     cursor: pointer;
     position: absolute;
     top: 0;
     right: 0;
-    background-color:transparent;
-    border:none;
-    margin:8px;
-    color:#fff;
-    transition:all 0.4s;
+    background-color: transparent;
+    border: none;
+    margin: 8px;
+    color: #fff;
+    transition: all 0.4s;
 }
-.button-cerrar svg{
-    width:24px;
-    height:24px;
+
+.button-cerrar svg {
+    width: 24px;
+    height: 24px;
 }
+
 .button-cerrar:hover {
-    background-color:red;
-    color:#fff;
-    overflow:hidden;
+    background-color: red;
+    color: #fff;
+    overflow: hidden;
 }
 
 
-.textarea::placeholder{
-color:black;
+.textarea::placeholder {
+    color: black;
 
 }
 
-.textarea{
-    resize:none; //ocultar barra de redimencionamieto 
-    padding:12px;
-    color:blue;
-    }
-
-.textarea:focus-visible{
-border:none;
- outline: none; //eliminar border cuando selecciono la parte del tedxto
- background-color:blue;
- padding:12px;
+.textarea {
+    resize: none;
+    padding: 12px;
+    color: blue;
 }
 
-
-//Edicion de lista de items
-
-   
+.textarea:focus-visible {
+    border: none;
+    outline: none;
+    background-color: blue;
+    padding: 12px;
+}

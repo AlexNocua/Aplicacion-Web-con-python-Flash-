@@ -7,7 +7,7 @@
     --components-bg-color: rgba(255, 87, 51, 0.5);
     --tittles-color: #EEEEEE;
     --tittles--size: 24px;
-    --background: linear-gradient(20deg, #005fff, 20%, #000000);
+    --background: linear-gradient(20deg, #363637, 20%, #000000);
     --color-text-p: #B4B4B4;
     --color-text-h4: #EEEEEE;
 
@@ -17,8 +17,8 @@ html {
     background: var(--background);
     height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    /* align-items: center;
+    justify-content: center; */
     overflow: hidden;
 }
 

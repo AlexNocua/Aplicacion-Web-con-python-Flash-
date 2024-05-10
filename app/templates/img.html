@@ -1,0 +1,19 @@
+
+<html>
+<head>
+    <title>Subir y Mostrar Imagen</title>
+</head>
+<body>
+    <h2>Subir Imagen</h2>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="image">
+        <input type="submit" value="Subir">
+    </form>
+    <h2>Imagen Cargada</h2>
+    {% if imagen_base64 %}
+        <img src="data:image/jpeg;base64,{{ imagen_base64 }}" alt="Imagen cargada">
+    {% else %}
+        <p>No se ha cargado ninguna imagen aún.</p>
+    {% endif %}
+</body>
+</html>

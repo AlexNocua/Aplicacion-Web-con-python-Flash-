@@ -1,32 +1,23 @@
-
 {% extends 'base.html' %}
 
+{% block configuracion %}
+  <div class="d-flex">
+    <div class="d-flex justify-content-center align-items-center flex-column">
+      <h1>Informacion de la cuenta</h1>
 
-{% block contenedor %}
-  <div class="login">
-    <div id="app_description" class="app_description col-7">
-      <h1>LinealChat</h1>
-      <p>Ingresa a nuestra app o crea una cuenta y comparte con los demás usuarios.</p>
-      <!-- <span><img src="{{url_for( 'static', filename = 'img/app_initial.png')}}" alt=""></span> -->
-    </div>
-    <div class="contenido_login col justify-content-center text-center" id="contenido_login">
-      <form class="d-flex flex-column" action="/iniciarSesion" method="post">
-        <h4>Correo o usuario</h4>
-        <input class="input_email" type="email" name="Email_de_acceso" id="" placeholder="email@correo.co" />
-        <h4>Password</h4>
-        <input class="input_password" type="password" name="Contraseña_de_acceso" id="" placeholder="password" />
-        <button class="btn-Ingresar mt-2" href="" type="submit">Ingresar</button>
-      </form>
-      <div class="row">
-        <button class="btn-mostrar_Form">¿Olvidaste tu contraseña?</button>
-
-        <p>No tienes cuenta</p>
-        <button id="mostrar_Form" class="btn-Register">Registrate</button>
+      <button>cambiar imagen</button>
+      <div style="display: none;">
+        <h2>Subir Imagen</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+          <input type="file" name="image" />
+          <input type="submit" value="Subir" />
+        </form>
       </div>
     </div>
-    <div class="register w-100" id="register" style="display: none;">
+    <div class="col">
       <form class="formulario d-flex flex-column align-items-center justify-content-center w-100" action="guardar_registro" method="post">
         <div class="entrada d-flex flex-column justify-content-center align-items-center w-100">
+          <label for="">Desea ajustar sus dato?</label>
           <h4>Digite su nombre</h4>
           <input class="w-50" type="text" name="nombre" />
         </div>
@@ -59,12 +50,6 @@
           <a href=""><button class="btn-Register" type="submit">Registrar Informacion</button></a>
         </div>
       </form>
-      <div class="informacionForm col-5 d-flex flex-column justify-content-center w-50">
-        <h1>Crea tu cuenta</h1>
-        <p>Participa en nuestra app web y creando tu usuario e interactuando con otros.</p>
-      </div>
     </div>
   </div>
 {% endblock %}
-
-<!-- mesaje de prueba -->
