@@ -5,8 +5,8 @@ from ClaseFormulario import formulario
 import base64
 
 
-con_bd = conexion()
 # con_bd = conexion() #Baquero
+con_bd = Conexion()  # alex
 
 app = Flask(__name__)
 
@@ -50,46 +50,53 @@ def iniciarSesion():
     contraseña_acceso = request.form['Contraseña_de_acceso']
 
     # verificar si se puede implementar mas condiciones respecto a ello
-    existe_usuario = users.find_one(
+    # print('datos dek ususario depuesdel envio de la imagen', datos_usuario)
+    usuario_Existente = users.find_one(
         {'correo': correo_acceso, 'contraseña': contraseña_acceso})
-    if existe_usuario:
-        nombre, apellido, correo, imagen = existe_usuario['nombre'], existe_usuario[
-            'apellido'], existe_usuario['correo'], existe_usuario['image']
+    if usuario_Existente:
+        nombre, apellido, correo, imagen = usuario_Existente['nombre'], usuario_Existente[
+            'apellido'], usuario_Existente['correo'], usuario_Existente['image']
 
-        print(imagen, 'fffffffffffffffffffffffffffffffffffffff')
+        # print(imagen, 'fffffffffffffffffffffffffffffffffffffff')
         imagen_base64 = base64.b64encode(
             imagen).decode('utf-8') if imagen else None
 
         # imagen_base64 = request.args.get('imagen_base64', None)
-        print('existe' if imagen_base64 else 'no existe')
-        return render_template('pagina_principal.html', nombre_usuario=nombre, apellido_usuario=apellido, correo_usuario=correo, imagen_base64=imagen_base64)
+        # print('existe' if imagen_base64 else 'no existe')
+
+        return index(usuario_Existente, imagen_base64)
     else:
         return 'No existe el usuario'
 
 
 # logica para editar los datos del ussuario desde la configuracion
-@app.route('/')
-def index():
+@ app.route('/principal')
+def index(usuario_Existente, imagen_base64):
     users = con_bd['users']
-    correo_acceso = 'nocua68@gmail.com'
+    correo_acceso = usuario_Existente['correo']
     usuario = users.find_one({'correo': correo_acceso})
     imagen = usuario.get('image', None)
     imagen_base64 = base64.b64encode(
         imagen).decode('utf-8') if imagen else None
-    return render_template('pagina_principal.html', imagen_base64=imagen_base64)
+
+    return render_template('pagina_principal.html', datos_usuario=usuario_Existente, imagen_base64=imagen_base64)
 
 
-@app.route('/upload', methods=['POST'])
+@ app.route('/upload', methods=['POST'])
 def upload():
+
+    datos_usuario = request.args.get('datos_usuario')
     users = con_bd['users']
     correo_acceso = 'nocua68@gmail.com'
-    if 'image' in request.files:
-        image = request.files['image']
-        if image.filename != '':
-            # Guarda la imagen en el usuario en MongoDB
-            users.update_one({'correo': correo_acceso}, {
-                             '$set': {'image': image.read()}})
-    return index()  # Renderiza la plantilla 'img.html' nuevamente después de cargar la imagen
+    print(datos_usuario, ' estos son los datos del usuario')
+    if 'imagen' in request.files:
+
+        imagen = request.files['imagen']
+        users.update_one({'correo': correo_acceso}, {
+            '$set': {'image': imagen.read()}})
+        return 'Imagen subida'
+
+    return 'No se ha proporcionado ninguna imagen'
 
 # @app.route('/Cargarimagen/<correo>', methods=['POST'])
 # def upload(correo):
@@ -105,10 +112,20 @@ def upload():
 #     return redirect(url_for('principal'))
 
 
-@ app.route('/pagina_principal')
-def pagina_principla():
+# logica para cargar la publicacion de cada uno de los estudiantes
 
-    return render_template('pagina_principal.html')
+@app.route('/subirPublicacion', method='POST')
+def subirPublicacion():
+    publicaciones = con_bd['publicaciones']
+    usuario = request.form['correo']
+    
+    
+
+
+@ app.route('/pagina_principal')
+def pagina_principla(datos_usuario):
+
+    return render_template('pagina_principal.html', datos_usuario=datos_usuario)
 
 
 @ app.route('/publicacion')

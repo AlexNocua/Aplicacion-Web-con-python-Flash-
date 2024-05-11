@@ -1,6 +1,5 @@
 @import '@radix-ui/colors/gray.css';
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:wght@300;400;500;700&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Burned&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Dancing+Script:wght@400..700&family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&family=Jost:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+HK:wght@100..900&family=Press+Start+2P&family=Princess+Sofia&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root {
     --main-bg-color: #111111;
@@ -14,19 +13,20 @@
 }
 
 html {
-    background: var(--background);
-    height: 100%;
+    font-family: "Chakra Petch", sans-serif;
+    width: 100%;
+    height: 100vh;
     display: flex;
-    /* align-items: center;
-    justify-content: center; */
-    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+
 }
 
 body {
-
+    height: 100%;
     display: flex;
     justify-content: center;
-    background: transparent;
+    background: #363637;
     font-family: "Roboto", sans-serif;
     align-items: center;
 
@@ -46,7 +46,7 @@ p {
 
     border-radius: 16px;
     background: rgb(32 32 32 / 50%);
-    padding: 20px;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -60,15 +60,11 @@ p {
 .app_description {
     display: flex;
     color: #fff;
-
-    margin: 12px;
+    padding: 12px;
     flex-direction: column;
 }
 
-.app_description img {
-    width: 100px;
-    height: 100px;
-}
+
 
 .app_description h4 {
     color: #fff;
@@ -77,7 +73,7 @@ p {
 
 .login .contenido_login {
     box-shadow: -10px 0 10px -5px rgb(9 14 38 / 80%);
-    padding: 12px;
+
 }
 
 input {
@@ -105,7 +101,7 @@ input {
     color: var(--tittles-color);
     border-radius: 12px;
     padding: 12px;
-    width: 100%;
+
 }
 
 .btn-mostrar_Form {
@@ -118,7 +114,7 @@ input {
 /* edicion del formulario */
 .register {
     width: 50%;
-    background:var(--);
+    background: var(--);
 }
 
 

@@ -1,55 +1,71 @@
 {% extends 'base.html' %}
 
 {% block configuracion %}
-  <div class="d-flex">
-    <div class="contenedor_cambiodeimagen d-flex justify-content-center align-items-center flex-column">
-      <h1>Informacion de la cuenta</h1>
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="d-flex container position-relative">
+      <button class="button_ocultar btn bg-danger position-absolute">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+        </svg>
+      </button>
 
-      <button>cambiar imagen</button>
-      <div style="display: none;">
-        <h2>Subir Imagen</h2>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-          <input type="file" name="image" />
-          <input type="submit" value="Subir" />
-        </form>
-      </div>
-    </div>
-    <div class="col">
-      <form class="formulario d-flex flex-column align-items-center justify-content-center w-100" action="guardar_registro" method="post">
-        <div class="entrada d-flex flex-column justify-content-center align-items-center w-100">
-          <label for="">Desea ajustar sus dato?</label>
+      <form class="formulario d-flex flex-column align-items-center justify-content-center" action="guardar_registro" method="post">
+        <div class="entrada d-flex flex-column justify-content-center align-items-center">
+          <label for="">¿Desea Actualizar alguno de sus datos?</label>
           <h4>Digite su nombre</h4>
-          <input class="w-50" type="text" name="nombre" />
+          <input placeholder="cambia" class="w-50" type="text" name="nombre" />
         </div>
-        <div class="entrada d-flex flex-column justify-content-center align-items-center w-100">
+        <div class="entrada d-flex flex-column justify-content-center align-items-center">
           <h4>Digite su apellido</h4>
-          <input class="w-50" type="text" name="apellido" />
+          <input placeholder="cambia" class="w-50" type="text" name="apellido" />
         </div>
-        <div class="entrada d-flex flex-column justify-content-center align-items-center w-100">
+        <div class="entrada d-flex flex-column justify-content-center align-items-center">
           <h4>Digite su correo</h4>
-          <input class="w-50" type="email" name="correo" />
+          <input placeholder="cambia" class="w-50" type="email" name="correo" />
         </div>
-        <div class="entrada d-flex flex-column justify-content-center align-items-center w-100">
-          <h4>Digite su contraseña</h4>
-          <input class="w-50" type="password" name="contraseña" />
+        <div class="entrada d-flex flex-column justify-content-center align-items-center">
+          <h4>Digite su contraseña anterior</h4>
+          <input placeholder="cambia" class="w-50" type="password" name="contraseña" />
         </div>
-        <div class="entrada d-flex flex-column justify-content-center align-items-center w-100">
-          <h4>Verifique su contraseña</h4>
-          <input class="w-50" type="password" name="configContraseña" />
+        <div class="entrada d-flex flex-column justify-content-center align-items-center">
+          <h4>Digite su contraseña nueva</h4>
+          <input placeholder="cambia" class="w-50" type="password" name="configContraseña" />
         </div>
-        <div class="entrada d-flex flex-column justify-content-center align-items-center w-100 d-flex row p-2">
-          <div class="d-flex m-2">
-            <h4>Acuerdo de tratamiento de datos</h4>
-            <label class="m-2" for="">Esta de acuerdo con nuestros términos y condiciones</label>
-          </div>
-          <p class="text-center">
-            Estoy de acuerdo.<input type="checkbox" />
-          </p>
-        </div>
+
         <div>
           <a href=""><button class="btn-Register" type="submit">Registrar Informacion</button></a>
         </div>
       </form>
+
+      <div class="contenedor_cambiodeimagen d-flex justify-content-center align-items-center flex-column w-50">
+        <h1 class="text-center">Informacion de la cuenta</h1>
+        <img src="" alt="Imagen de" />
+        <button>¿Deseas cambiar tu imagen?</button>
+        <!--         
+
+          seccion de upload
+                -->
+
+        <form action="/upload" method="post" enctype="multipart/form-data" style="display:none">
+          <h2>Subir Imagen</h2>
+          <input type="file" name="imagen" />
+          <input type="submit" value="Subir" />
+        </form>
+
+        <!--       
+
+
+
+
+                -->
+        <div style="display: none;">
+          <h2>Subir Imagen</h2>
+          <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="image" />
+            <input type="submit" value="Subir" />
+          </form>
+        </div>
+      </div>
     </div>
   </div>
-{% endblock  %}
+{% endblock %}
