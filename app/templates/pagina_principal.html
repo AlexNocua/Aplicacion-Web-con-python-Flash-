@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 {% block pagina_principal %}
-  <nav class="nav_fixed d-flex w-100 justify-content-around align-items-center">
+  <nav class="nav_fixed d-flex w-100 justify-content-around align-items-center" style="z-index: 10;">
     <div>
       <h1>LinealChat</h1>
     </div>
     <div class="text-center btn-navsuper">
-      <a href="">Configuracion de cuenta</a>
-
+      <button id="Mostrarconfiguraciones">Configuracion de Cuenta</button>
       <img src="{{ url_for('static', filename='img/icons/configuraciones.png') }}" alt="" />
     </div>
     <div class="text-center btn-navsuper">
@@ -17,23 +16,78 @@
   </nav>
 
   <!-- Cnfigutaciones--- -->
-   --> -------------------------------------------->
+   --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> -->
+  <div class="">
+    <div id="ContendorConfiguraciones" class="justify-content-center align-items-center" style="opacity: 0; z-index: 0; transition: all 0.2s;">
+      <div class="d-flex container position-relative">
+        <button class="button_ocultar btn bg-danger position-absolute">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+          </svg>
+        </button>
+
+        <form class="formulario d-flex flex-column align-items-center justify-content-center" action="/actualizarDatos/{{ usuario_Existente['correo'] }}" method="post">
+          <div class="entrada d-flex flex-column justify-content-center align-items-center">
+            <label for="">¿Desea Actualizar alguno de sus datos?</label>
+            <h4>Edite su nombre</h4>
+            <input class="w-50" type="text" placeholder="{{ usuario_Existente['nombre'] }}" name="nombre" />
+          </div>
+          <div class="entrada d-flex flex-column justify-content-center align-items-center">
+            <h4>Edite su apellido</h4>
+            <input class="w-50" type="text" placeholder="{{ usuario_Existente['apellido'] }}" name="apellido" />
+          </div>
+          <div class="entrada d-flex flex-column justify-content-center align-items-center">
+            <h4>Edite su correo</h4>
+            <input class="w-50" type="email" placeholder="{{ usuario_Existente['correo'] }}" name="correo" />
+          </div>
+          <div class="entrada d-flex flex-column justify-content-center align-items-center">
+            <h4>Edite su contraseña anterior</h4>
+            <input class="w-50" type="password" name="contraseña" />
+          </div>
+          <div class="entrada d-flex flex-column justify-content-center align-items-center">
+            <h4>Edite su contraseña nueva</h4>
+            <input class="w-50" type="password" name="nueva_contraseña" />
+          </div>
+          <div>
+            <button class="btn-Register" type="submit" onclick="confirm('Seguro que quiere actualizar los datos del usuario {{ usuario_Existente['correo'] }}')">Registrar Informacion</button>
+          </div>
+        </form>
+
+        <div class="contenedor_cambiodeimagen d-flex justify-content-center align-items-center flex-column w-50">
+          <h1 class="text-center">Informacion de la cuenta</h1>
+          <img class="imagenUsuario" src="data:image/jpeg;base64,{{ imagen_base64 }}" alt="Imagen de {{ usuario_Existente['nombre'] }} " />
+
+          <button>¿Deseas cambiar tu imagen?</button>
+          <!--                                                                                                        
+
+        seccion de upload
+                                                                                                             -->
+
+          <h2>Subir Imagen</h2>
+          <form id="uploadForm" class="d-flex justify-content-center align-items-center flex-column" action="/upload/{{ usuario_Existente['correo'] }}" method="post" enctype="multipart/form-data">
+            <input type="file" name="imagen" />
+            <input type="submit" value="Subir" style="display: flex;" /> <!-- Este botón está oculto -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  --> --> --> --> --> --> -------------------------------------------->
 
 
   <!-- seccion para las configfuraciones de cada usuario -->
-  <form action="/upload" method="post" enctype="multipart/form-data">
-    <h2>Subir Imagen</h2>
-    <input type="file" name="imagen" />
-    <input type="submit" value="Subir" />
-  </form>
 
-  <div class="container d-flex">
+  <!--                                                                                                  
+   <a href="#" onclick="document.getElementById('uploadForm').submit(); return false;">Subir Imagen</a>
+                                                                                                  -->
+
+  <div class="container containerBotonesAcciones d-flex">
     <div class="d-flex col-5 flex-column pt-2 colum-infromation">
       <div class="justify-content-center text-center">
         <!-- imagen recibida del ususario -->
         <span>
-          <h1>Bienvenido {{ datos_usuario['nombre'] }}</h1>
-          <img class="imagenUsuario" src="data:image/jpeg;base64,{{ imagen_base64 }}" alt="Imagen de {{ datos_usuario['nombre'] }} " />
+          <h1>Bienvenido {{ usuario_Existente['nombre'] }}</h1>
+          <img class="imagenUsuario" src="data:image/jpeg;base64,{{ imagen_base64 }}" alt="Imagen de {{ usuario_Existente['nombre'] }} " />
         </span>
         <p></p>
       </div>
@@ -42,60 +96,111 @@
           <img src="{{ url_for('static', filename='img/icons/Icon_friend.png') }}" alt="" />
           <p class="m-1">Amigos</p>
         </span>
-        <span class="d-flex align-items-center">
-          <img src="{{ url_for('static', filename='img/icons/imagen-icon.png') }}" alt="" />
-          <p class="m-1">Fotos</p>
-        </span>
+        <div class="section_Amigos">
+          <span class="d-flex align-items-center">
+            <img src="{{ url_for('static', filename='img/icons/imagen-icon.png') }}" alt="" />
+            <p class="m-1">Fotos</p>
+          </span>
+        </div>
         <span class="d-flex align-items-center">
           <img src="{{ url_for('static', filename='img/icons/publication-icon.png') }}" alt="" />
-          <p class="m-1">Publicaciones</p>
+          <button class="m-1"></button>Publicaciones
         </span>
+
         <span class="d-flex align-items-center">
           <img src="{{ url_for('static', filename='img/icons/personas.png') }}" alt="" />
-          <p class="m-1">Personas</p>
+          <button class="m-1 btnpersonas">Personas</button>
         </span>
         <span class="d-flex align-items-center">
           <img src="{{ url_for('static', filename='img/icons/solicitud-icon.png') }}" alt="" />
-          <p class="m-1">Solicitudes</p>
+          <button class="m-1 btnsolicitudes">Solicitudes</button>
         </span>
       </div>
     </div>
 
-    <!-- Seccion de publicaciones dondese van a guardar en una listas de publicaciones -->
-    <div class="section_publications d-flex col flex-column p-2">
-      <div class="d-flex flex-column">
-        <div class="d-flex flex-column">
-          <div class="texts">
-            <div class="Navdepublicacion d-flex justify-content-center align-items-center">
-              <h3>Crea tu publicación</h3>
+    <!-- container de listado de personas -->
+    <div class="container listaSolicitudes" style="opacity: 0; z-index: 0;">
+      <button class="button_ocultarPersonas btn bg-danger position-absolute">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+        </svg>
+      </button>
+      <h3>Personas que quizás conozcas:</h3>
+      {% for usuario in listUsers %}
+        {% if usuario_Existente['correo'] not in usuario['correo'] %}
+          <div class="informacionPersonas d-flex">
+            <div class="d-flex flex-column">
+              <h1>{{ usuario['nombre'] }}</h1>
+
+              <p>Descripción de la persona.</p>
             </div>
-            <form action="/subirPublicacion">
-              <textarea name="" id="" cols="30"></textarea>
-              <input type="submit" />
+
+            <form action="/enviarSolicitud/{{ usuario_Existente['correo'] }}" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="CorreoOtroUsuario" value="{{ usuario['correo'] }}" />
+              <button class="m-3" type="submit">Enviar Solicitud</button>
             </form>
-            <span class="d-flex justify-content-center align-items-center">
-              <button class="m-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
-                  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                  <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
-                </svg>Publicar imagen
-              </button>
-              <form action="/upload" method="post" enctype="multipart/form-data" style="display :none">
-                <h2>Subir Imagen</h2>
-                <input type="file" name="imagen" />
-                <input type="submit" value="Subir" />
-              </form>
-              <button class="m-1">Publicar</button>
-            </span>
           </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- container de listado de solicitudes -->
+    <div class="container AceptarSolicitudes" style="opacity: 0; z-index: 0;">
+      <button class="button_ocultarsolicitudes btn bg-danger position-absolute">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+        </svg>
+      </button>
+      <h3>Solicitudes de amistad</h3>
+      {% for solicitud in solicitudes %}
+        <div>
+          <h1>Tienes una solicitud de:</h1>
+          <h1>{{ solicitud['correo_enviador'] }}</h1>
+        </div>
+        <form action="/AceptarSolicitud/{{ solicitud['correo_enviador'] }}" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="correo" value="{{ solicitud['correo_receptor'] }}" />
+          <button class="m-3" type="submit">Aceptar solicitud</button>
+        </form>
+      {% endfor %}
+    </div>
+
+    <!-- Seccion de publicaciones dondese van a guardar en una listas de publicaciones -->
+    <div class="d-flex col section_publications flex-column p-2">
+      <div class="d-flex flex-column">
+        <div class="texts">
+          <div class="Navdepublicacion d-flex justify-content-center align-items-center">
+            <h4>¿Piensas en algo?</h4>
+          </div>
+          <form class="d-flex flex-column" action="/subirPublicacion/{{ usuario_Existente['correo'] }}" method="post" enctype="multipart/form-data" y>
+            <textarea name="texto" id="" cols="30"></textarea>
+            <button type="submit" value="Subir publicación">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z" />
+              </svg>Publicar
+            </button>
+          </form>
         </div>
       </div>
 
-      <!--                  
+      <!--                                                                                                                      
   
-      esta seccion tiene que ser configurada para traer cada una de las publicaciones que hacemos                  -->
-      <section>
-        <h4>Otras publicaciones</h4>
+      esta seccion tiene que ser configurada para traer cada una de las publicaciones que hacemos                                                                                                                      -->
+      <section class="container publicaciones">
+        <h4 class="tittle text-center">Publicaciones</h4>
+        <div class="d-flex flex-column">
+          {% for publicacion in publicaciones %}
+            <div class="">
+              <div class="informaciontiempo text-center d-flex flex-column">
+                <h4>Publicacion realizada por {{ publicacion['nombre_user'] }}</h4>
+                <h6>Publicado el :{{ publicacion['fecha_publicacion'] }}</h6>
+              </div>
+              <div class="informacionPublicacion">
+                <p>{{ publicacion['publicacion_text'] }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
       </section>
     </div>
   </div>

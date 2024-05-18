@@ -27,3 +27,7 @@ const btn_volverLogin = document.getElementById('btn_volverLogin').addEventListe
         formRegistro.style.display = 'flex';
     }
 })
+
+
+
+// panel para la muestra de configuraciones con js

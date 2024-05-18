@@ -2,14 +2,16 @@ from datetime import *
 
 
 class Publicacion:
-    def __init__(self, nombre_user, publicacion_text, publicacion_img):
+    def __init__(self, correo_user, nombre_user, publicacion_text, publicacion_img=None):
         self.nombre_user = nombre_user
+        self.correo_user = correo_user
         self.publicacion_text = publicacion_text
         self.publicacion_img = publicacion_img
         self.fecha_publicacion = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     def formato_doc(self):
         return {
+            'correo_user': self.correo_user,
             'nombre_user': self.nombre_user,
             'publicacion_text': self.publicacion_text,
             'publicacion_img': self.publicacion_img,
@@ -17,8 +19,6 @@ class Publicacion:
         }
 
 
-p = Publicacion('Alex', 'hola todos', None)
-
-
-# cuando quiera acceder a los metodos de la clase tengo que hacerlo desde la instancia
+p = Publicacion('aaa', 'dasdas', 'asdasdas', None)
+print(p)
 print(p.formato_doc())

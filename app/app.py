@@ -1,8 +1,12 @@
 
+from flask import request
 from flask import Flask, render_template, request, redirect, url_for
 from config import *
 from ClaseFormulario import formulario
 import base64
+from datetime import *
+from publicaciones import *
+from mensajes import *
 
 
 # con_bd = conexion() #Baquero
@@ -73,29 +77,46 @@ def iniciarSesion():
 @ app.route('/principal')
 def index(usuario_Existente, imagen_base64):
     users = con_bd['users']
+    listUsers = users.find()
+    colSolicitudesPendientes = con_bd['Solicitudes_Pendientes']
+    SolicitudesPendientes = colSolicitudesPendientes.find()
+    colpublicaciones = con_bd['publicaciones']
+    publicaciones = colpublicaciones.find()
     correo_acceso = usuario_Existente['correo']
     usuario = users.find_one({'correo': correo_acceso})
     imagen = usuario.get('image', None)
     imagen_base64 = base64.b64encode(
         imagen).decode('utf-8') if imagen else None
 
-    return render_template('pagina_principal.html', datos_usuario=usuario_Existente, imagen_base64=imagen_base64)
+    return render_template('pagina_principal.html', usuario_Existente=usuario_Existente, imagen_base64=imagen_base64, publicaciones=publicaciones, listUsers=listUsers, solicitudes=SolicitudesPendientes)
 
 
-@ app.route('/upload', methods=['POST'])
-def upload():
+@app.route('/upload/<correo>', methods=['POST', 'GET'])
+def upload(correo):
 
-    datos_usuario = request.args.get('datos_usuario')
+    usuario_correo = correo
+    print(usuario_correo)
+    # Aquí puedes usar usuario_correo para acceder al correo electrónico del usuario
     users = con_bd['users']
-    correo_acceso = 'nocua68@gmail.com'
-    print(datos_usuario, ' estos son los datos del usuario')
+    correo_acceso = usuario_correo
+    # envio de datos y actualizaciones respecto a las publicaciones
+    colSolicitudesPendientes = con_bd['Solicitudes_Pendientes']
+    SolicitudesPendientes = colSolicitudesPendientes.find()
+    listUsers = users.find()
+    colpublicaciones = con_bd['publicaciones']
+    publicaciones = colpublicaciones.find()
+    # ---------------------------------------------------------------
+    print(usuario_correo, ' estos son los datos del usuario')
     if 'imagen' in request.files:
-
         imagen = request.files['imagen']
         users.update_one({'correo': correo_acceso}, {
             '$set': {'image': imagen.read()}})
-        return 'Imagen subida'
-
+        usuario_Existente = users.find_one(
+            {'correo': correo_acceso})
+        imagen = usuario_Existente.get('image', None)
+        imagen_base64 = base64.b64encode(
+            imagen).decode('utf-8') if imagen else None
+        return render_template('pagina_principal.html', usuario_Existente=usuario_Existente, imagen_base64=imagen_base64, publicaciones=publicaciones, listUsers=listUsers, solicitudes=SolicitudesPendientes)
     return 'No se ha proporcionado ninguna imagen'
 
 # @app.route('/Cargarimagen/<correo>', methods=['POST'])
@@ -114,12 +135,118 @@ def upload():
 
 # logica para cargar la publicacion de cada uno de los estudiantes
 
-@app.route('/subirPublicacion', method='POST')
-def subirPublicacion():
-    publicaciones = con_bd['publicaciones']
-    usuario = request.form['correo']
-    
-    
+# @app.route('/subirPublicacion', method='POST')
+# def subirPublicacion():
+#     publicaciones = con_bd['publicaciones']
+#     usuario = request.form['correo']
+#     return 'publvicaicon'
+
+
+# actualizar los datos del ussuario desde l configuracion
+@app.route('/actualizarDatos/<correoExistente>', methods=['POST'])
+def ActualizarDatos(correoExistente):
+    nombre = request.form['nombre']
+    apellido = request.form['apellido']
+    correo = request.form['correo']
+    contraseña = request.form['contraseña']
+    nueva_contraseña = request.form['nueva_contraseña']
+    if nombre == None and correo == None and contraseña == None and nueva_contraseña == None or nombre == '' and correo == '' and contraseña == '' and nueva_contraseña == '':
+        return 'No se ingreso ningun dato, por favor regrese a la pagina anterior'
+    else:
+
+        users = con_bd['users']
+        usuario = users.find_one({'correo': correo})
+        _contraeña_Anterior = usuario['contraseña']
+
+        if contraseña != contraseña:
+            return 'La contraseña ingresada no coincide con la anterior'
+
+        users.update_one({'correo': correo}, {'$set': {
+
+            'nombre': nombre,
+            'apellido': apellido,
+            'correo': correo,
+            'contraseña': nueva_contraseña
+        }})
+
+        # envio de datos y actualizaciones respecto a las publicaciones
+        colSolicitudesPendientes = con_bd['Solicitudes_Pendientes']
+        SolicitudesPendientes = colSolicitudesPendientes.find()
+        imagen = usuario.get('image', None)
+        imagen_base64 = base64.b64encode(
+            imagen).decode('utf-8') if imagen else None
+        listUsers = users.find()
+        colpublicaciones = con_bd['publicaciones']
+        publicaciones = colpublicaciones.find()
+        # ---------------------------------------------------------------
+        return render_template('pagina_principal.html', usuario_Existente=usuario_Existente, imagen_base64=imagen_base64, publicaciones=publicaciones, listUsers=listUsers, solicitudes=SolicitudesPendientes)
+
+
+@app.route('/subirPublicacion/<correo>', methods=['POST'])
+def SubirPublicacion(correo):
+    texto = request.form['texto']
+    users = con_bd['users']
+    if 'imagen' in request.files:
+        imagen = request.files['imagen']
+    else:
+        imagen = None
+
+    usuario = users.find_one({'correo': correo})
+    nombre = usuario['nombre']
+    publicacion = Publicacion(correo, nombre, texto)
+
+    colPublicaciones = con_bd['publicaciones']
+    colPublicaciones.insert_one(publicacion.formato_doc())
+
+    # envio de datos y actualizaciones respecto a las publicaciones
+    colSolicitudesPendientes = con_bd['Solicitudes_Pendientes']
+    SolicitudesPendientes = colSolicitudesPendientes.find()
+    imagen = usuario.get('image', None)
+    imagen_base64 = base64.b64encode(
+        imagen).decode('utf-8') if imagen else None
+    listUsers = users.find()
+    colpublicaciones = con_bd['publicaciones']
+    publicaciones = colpublicaciones.find()
+    # ---------------------------------------------------------------
+    return render_template('pagina_principal.html', usuario_Existente=usuario_Existente, imagen_base64=imagen_base64, publicaciones=publicaciones, listUsers=listUsers, solicitudes=SolicitudesPendientes)
+
+
+# enviar solicitudes de amistad
+@ app.route('/enviarSolicitud/<correo>', methods=['POST'])
+def enviarSolicitud(correo):
+    EnviarCorreoA = request.form.get('CorreoOtroUsuario')
+    users = con_bd['users']
+    usuario = users.find_one({'correo': correo})
+    con_bd['Solicitudes_Pendientes'].insert_one({
+        'correo_enviador': correo,
+        'correo_receptor': EnviarCorreoA
+    })
+
+    # envio de datos y actualizaciones respecto a las publicaciones
+    coleccionSolicitudes = con_bd['Solicitudes_Pendientes']
+    solicitudes = coleccionSolicitudes.find()
+    imagen = usuario.get('image', None)
+    imagen_base64 = base64.b64encode(
+        imagen).decode('utf-8') if imagen else None
+    listUsers = users.find()
+    colpublicaciones = con_bd['publicaciones']
+    publicaciones = colpublicaciones.find()
+    # ---------------------------------------------------------------
+    return render_template('pagina_principal.html', usuario_Existente=usuario, imagen_base64=imagen_base64, publicaciones=publicaciones, listUsers=listUsers, solicitudes=solicitudes)
+
+
+@app.route('/AceptarSolicitud/<correo_enviador>', methods=['POST'])
+def AceptarSolicitud(correo_enviador):
+    users = con_bd['users']
+    correo = request.form.get('correo')
+
+    coleccionSolicitudes = con_bd['Solicitudes_Pendientes']
+    coleccionSolicitudes.delete_one({'correo_enviador': correo_enviador,
+                                     'correo_receptor': correo})
+    mensajes = Mensajes(correo, correo_enviador)
+    coleccionMensajeria = con_bd['Mensajes']
+    coleccionMensajeria.insert_one(mensajes.formato_doc())
+    return 'Se creo el chat'
 
 
 @ app.route('/pagina_principal')
@@ -143,6 +270,11 @@ def inforPerson():
 @ app.route('/configuracion')
 def configuracion():
     return render_template('configuracionCuenta.html')
+
+
+@ app.route('/mensajes')
+def mesnajes():
+    return render_template('mensajes.html')
 
 
 if __name__ == '__main__':
