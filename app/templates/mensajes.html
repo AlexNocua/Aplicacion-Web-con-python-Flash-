@@ -1,10 +1,52 @@
 {% extends 'base.html' %}
 {% block mensajes %}
   <div class="container h-75">
-    <button class="position-relative">Volver a la pagina principal</button>
+    <a href="/" class="btn btn-secondary">Volver a la página principal</a>
     <div class="d-flex">
-      <div class="w-25 sectionChats">Aqui se van a mostrar los chasts</div>
-      <div class="w-75 sectionMensajes">Aqui se va a cargar los mensajes de cada uno de los chat</div>
+      <div class="w-25 sectionChats">
+        <h1>Chatea con tus amigos</h1>
+        <div class="container d-flex flex-column">
+          <h2>Tus chats</h2>
+          {% for chat in chats %}
+            <h3>
+              <a href="/mensajes/{{ chat['_id'] }}">
+                {% if chat['usuario1'] == usuario_Existente['correo'] %}
+                  {{ chat['usuario2'] }}
+                {% else %}
+                  {{ chat['usuario1'] }}
+                {% endif %}
+              </a>
+            </h3>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="w-75 sectionMensajes">
+        <div class="container mensajes h-75">
+          {% if mensajes %}
+            {% for mensaje in mensajes %}
+              <div class="mensaje">
+                <p>
+                  <strong>{{ mensaje['autor'] }}:</strong> {{ mensaje['contenido'] }}
+                </p>
+                <p>
+                  <small>{{ mensaje['fecha'] }}</small>
+                </p>
+              </div>
+            {% endfor %}
+          {% else %}
+            <p>No hay mensajes en este chat.</p>
+          {% endif %}
+        </div>
+
+        <div class="nav panel_envio">
+          <form action="/enviarMensaje" class="d-flex" method="post">
+            <input type="hidden" name="chat_id" value="{{ chat_id }}" />
+            <input type="hidden" name="usuario_Existente" value="{{ usuario_Existente['correo'] }}" />
+            <input type="text" name="mensaje" placeholder="Escribe un mensaje" class="form-control" />
+            <input type="submit" value="Enviar Mensaje" class="btn btn-primary" />
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 {% endblock %}

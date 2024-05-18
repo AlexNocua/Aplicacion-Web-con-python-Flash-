@@ -7,7 +7,7 @@ class Mensajes:
         self.usuario2 = usuario2
         self.mensajes = mensajes
         self.fechas = datetime.now().strftime(
-            "Mensaje enviado en la fecha %Y-%m-%d  y en el tiempo %H:%M:%S")
+            "Chat creado en la fecha %Y-%m-%d  y en el tiempo %H:%M:%S")
 
     def formato_doc(self):
         return {

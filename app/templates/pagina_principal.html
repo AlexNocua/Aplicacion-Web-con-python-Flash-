@@ -9,14 +9,14 @@
       <img src="{{ url_for('static', filename='img/icons/configuraciones.png') }}" alt="" />
     </div>
     <div class="text-center btn-navsuper">
-      <a href="">Mensajes</a>
+      <a href="/mensajeria/{{usuario_Existente['correo']}}">Mensajes</a>
 
       <img src="{{ url_for('static', filename='img/icons/chat.png') }}" alt="" />
     </div>
   </nav>
 
   <!-- Cnfigutaciones--- -->
-   --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> -->
+   --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> --> -->
   <div class="">
     <div id="ContendorConfiguraciones" class="justify-content-center align-items-center" style="opacity: 0; z-index: 0; transition: all 0.2s;">
       <div class="d-flex container position-relative">
@@ -58,10 +58,10 @@
           <img class="imagenUsuario" src="data:image/jpeg;base64,{{ imagen_base64 }}" alt="Imagen de {{ usuario_Existente['nombre'] }} " />
 
           <button>¿Deseas cambiar tu imagen?</button>
-          <!--                                                                                                        
+          <!--                                                                                                         
 
         seccion de upload
-                                                                                                             -->
+                                                                                                              -->
 
           <h2>Subir Imagen</h2>
           <form id="uploadForm" class="d-flex justify-content-center align-items-center flex-column" action="/upload/{{ usuario_Existente['correo'] }}" method="post" enctype="multipart/form-data">
@@ -77,9 +77,9 @@
 
   <!-- seccion para las configfuraciones de cada usuario -->
 
-  <!--                                                                                                  
+  <!--                                                                                                   
    <a href="#" onclick="document.getElementById('uploadForm').submit(); return false;">Subir Imagen</a>
-                                                                                                  -->
+                                                                                                   -->
 
   <div class="container containerBotonesAcciones d-flex">
     <div class="d-flex col-5 flex-column pt-2 colum-infromation">
@@ -183,9 +183,9 @@
         </div>
       </div>
 
-      <!--                                                                                                                      
+      <!--                                                                                                                       
   
-      esta seccion tiene que ser configurada para traer cada una de las publicaciones que hacemos                                                                                                                      -->
+      esta seccion tiene que ser configurada para traer cada una de las publicaciones que hacemos                                                                                                                       -->
       <section class="container publicaciones">
         <h4 class="tittle text-center">Publicaciones</h4>
         <div class="d-flex flex-column">

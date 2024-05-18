@@ -7,6 +7,7 @@ import base64
 from datetime import *
 from publicaciones import *
 from mensajes import *
+from bson import ObjectId
 
 
 # con_bd = conexion() #Baquero
@@ -208,22 +209,23 @@ def SubirPublicacion(correo):
     colpublicaciones = con_bd['publicaciones']
     publicaciones = colpublicaciones.find()
     # ---------------------------------------------------------------
-    return render_template('pagina_principal.html', usuario_Existente=usuario_Existente, imagen_base64=imagen_base64, publicaciones=publicaciones, listUsers=listUsers, solicitudes=SolicitudesPendientes)
+    return render_template('pagina_principal.html', usuario_Existente=usuario, imagen_base64=imagen_base64, publicaciones=publicaciones, listUsers=listUsers, solicitudes=SolicitudesPendientes)
 
 
-# enviar solicitudes de amistad
-@ app.route('/enviarSolicitud/<correo>', methods=['POST'])
+@app.route('/enviarSolicitud/<correo>', methods=['POST'])
 def enviarSolicitud(correo):
     EnviarCorreoA = request.form.get('CorreoOtroUsuario')
     users = con_bd['users']
     usuario = users.find_one({'correo': correo})
-    con_bd['Solicitudes_Pendientes'].insert_one({
-        'correo_enviador': correo,
-        'correo_receptor': EnviarCorreoA
-    })
 
-    # envio de datos y actualizaciones respecto a las publicaciones
     coleccionSolicitudes = con_bd['Solicitudes_Pendientes']
+
+    if not coleccionSolicitudes.find_one({'correo_enviador': correo, 'correo_receptor': EnviarCorreoA}):
+        coleccionSolicitudes.insert_one({
+            'correo_enviador': correo,
+            'correo_receptor': EnviarCorreoA
+        })
+
     solicitudes = coleccionSolicitudes.find()
     imagen = usuario.get('image', None)
     imagen_base64 = base64.b64encode(
@@ -231,7 +233,7 @@ def enviarSolicitud(correo):
     listUsers = users.find()
     colpublicaciones = con_bd['publicaciones']
     publicaciones = colpublicaciones.find()
-    # ---------------------------------------------------------------
+
     return render_template('pagina_principal.html', usuario_Existente=usuario, imagen_base64=imagen_base64, publicaciones=publicaciones, listUsers=listUsers, solicitudes=solicitudes)
 
 
@@ -241,12 +243,55 @@ def AceptarSolicitud(correo_enviador):
     correo = request.form.get('correo')
 
     coleccionSolicitudes = con_bd['Solicitudes_Pendientes']
-    coleccionSolicitudes.delete_one({'correo_enviador': correo_enviador,
-                                     'correo_receptor': correo})
-    mensajes = Mensajes(correo, correo_enviador)
+
+    coleccionSolicitudes.delete_one(
+        {'correo_enviador': correo_enviador, 'correo_receptor': correo})
+
     coleccionMensajeria = con_bd['Mensajes']
-    coleccionMensajeria.insert_one(mensajes.formato_doc())
+    if not coleccionMensajeria.find_one({'$or': [{'usuario1': correo, 'usuario2': correo_enviador}, {'usuario1': correo_enviador, 'usuario2': correo}]}):
+        mensajes = Mensajes(correo, correo_enviador)
+        coleccionMensajeria.insert_one(mensajes.formato_doc())
+
     return 'Se creo el chat'
+
+
+@app.route('/mensajeria/<correo>')
+def ventanaMensajeria(correo):
+    usuarios = con_bd['users']
+    usuario = usuarios.find_one({'correo': correo})
+    colMensajes = con_bd['Mensajes']
+    chats_usuario1 = list(colMensajes.find({'usuario1': correo}))
+    chats_usuario2 = list(colMensajes.find({'usuario2': correo}))
+
+    if chats_usuario1 or chats_usuario2:
+        return render_template('mensajes.html', usuario_Existente=usuario, chats=chats_usuario1 + chats_usuario2)
+
+
+@app.route('/enviarMensaje', methods=['POST'])
+def enviarMensaje():
+    Correo_usuario_Existente = request.form['usuario_Existente']
+    mensaje = request.form['mensaje']
+    autor = Correo_usuario_Existente
+    fecha = datetime.now().strftime('Enviado a las %H:%M del %Y-%m-%d')
+    usuarios = con_bd['users']
+    usuario = usuarios.find_one({'correo': Correo_usuario_Existente})
+
+    correo = usuario["correo"]
+
+    _ID = ObjectId(usuario["_id"])
+    colMensajes = con_bd['Mensajes']
+    chats_usuario1 = list(colMensajes.find({'usuario1': correo}))
+    chats_usuario2 = list(colMensajes.find({'usuario2': correo}))
+
+    coleccionMensajeria = con_bd['Mensajes']
+    coleccionMensajeria.update_one(
+        {'_id': _ID},
+        {'$push': {'mensajes': {'autor': autor, 'contenido': mensaje, 'fecha': fecha}}}
+    )
+    print('Enviado')
+    # return f'{Correo_usuario_Existente}{mensaje}{autor}{fecha}'
+    return render_template('mensajes.html', usuario_Existente=Correo_usuario_Existente, chats=chats_usuario1 + chats_usuario2)
+    # revisar el envio de mensajes y una nueva forma para accesasr al chat
 
 
 @ app.route('/pagina_principal')

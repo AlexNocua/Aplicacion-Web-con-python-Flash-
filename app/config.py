@@ -1,4 +1,6 @@
 # Dejar conexion local para hacer pruebas
+from pymongo.server_api import ServerApi
+from pymongo.mongo_client import MongoClient
 import pymongo
 from pymongo import MongoClient
 import certifi
@@ -16,6 +18,27 @@ def Conexion():
 
 Conexion()
 
+
+# MONGO = "mongodb+srv://dbAdmin:JmD3syv14nYqUdUo@redsocial.pejsc3e.mongodb.net/?retryWrites=true&w=majority&appName=Redsocial"
+# certificado = certifi.where()
+# # Create a new client and connect to the server
+
+# # Send a ping to confirm a successful connection
+
+
+# def Conexion():
+#     try:
+#         client = MongoClient(MONGO, server_api=ServerApi('1'))
+#         db = client["Red_social"]
+#         print('Conecto la coneccion Virtual')
+#         print(db)
+#     except ConnectionError:
+#         print('Error de conexion')
+
+#     return db
+
+
+# Conexion()
 
 # descomentar con control+k+u
 # comentar con control+k+c
